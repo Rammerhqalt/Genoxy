@@ -1,73 +1,115 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-  
-  <head>
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
   <title>Genarcy</title>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
-  <link href="css/navbar.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    integrity="sha512-9DIukDzbuwFI7g+CKXeWaCjKk3Dgklv6f5K7k9+Pce6lRURQKc+nWUJQo/0OaCbImAhZYsqNsl44u5bKNTl6BA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="/css/navbar.css" rel="stylesheet" type="text/css" />
+  <link href="/css/game.css" rel="stylesheet" type="text/css" />
   <script src="https://kit.fontawesome.com/b314b192d4.js" crossorigin="anonymous"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
+   @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
-
+  
     body {
-      background-color: linear-gradient(to bottom right, #4C0033, #790252, #AF0171, #E80F88);
-      background-size: cover; /* Change background-size to 'cover' */
-      background-repeat: no-repeat;
-      background-position: center;
+      font-family: 'Exo 2', sans-serif;
+      margin: 0; /* Reset default margin */
     }
 
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh; /* Add min-height to ensure the content covers the whole screen */
-    }
+.card {
+  background-color: #0C134F;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 5px #ddd;
+  padding: 20px;
+  width: 150px;
+  height: 220px;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  color: #333;
+  margin-bottom: 20px;
+  float: left;
+  margin-right: 20px;
+  border-radius: 10px;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-decoration: none;
+}
 
-    /* Rest of the CSS code */
+.card img {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+}
 
-    #canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
+.card h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #D4ADFC;
+  margin-bottom: 5px;
+}
 
-    #particles-js canvas {
-      background-color: #000;
-    }
+.card p {
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #D4ADFC;
+  height: 30%;
+}
 
-    #particles-js .particle {
-      border-radius: 50%;
-      opacity: 0.8;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-    }
+.card:before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  z-index: -1;
+  border-radius: 15px;
+  background-image: linear-gradient(to bottom right, #494F55, #666362, #0C0404, #000000);
+  transition: transform 0.2s ease-in-out;
+  transform-origin: 0% 0%;
+  box-sizing: border-box;
+}
 
-    .lilah {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      margin-bottom: 200px;
-      font-family: "Open Sans", sans-serif;
-    }
+.card:hover:before {
+  transform: scale(1.1);
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.card:hover {
+  transform: scale(1.1) translate(-10px, -10px);
+  z-index: 1;
+  cursor: pointer;
+  text-decoration: none;
+}
+
   </style>
 </head>
-  <body>
+<body>
   <!--NavBar-->
   <nav class="navbar">
-    <a href="#" style="text-decoration: none;">
+    <a href="index.html" style="text-decoration: none;">
       <div class="navbar-logo">Genarcy</div>
     </a>
     <div style="display: flex; align-items: center;">
@@ -77,84 +119,71 @@
         <span class="navbar-toggle-icon"></span>
       </button>
       <div class="navbar-links" id="navbarLinks">
-        <a href="#" class="fa-solid fa-house"></a>
+        <a href="index.html" class="fa-solid fa-house"></a>
         <a href="game.html" class="fa-solid fa-gamepad"></a>
         <a href="#" class="fa-solid fa-people-group"></a>
         <a href="#" class="fa-solid fa-handshake"></a>
       </div>
     </div>
   </nav>
-     <script>
-    var canvas = document.querySelector('canvas');
-    var ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  <!--end of navbar 0RCA-->
+  <h1 style="margin-top: 100px;">Games</h1>
+  <div class="card-container"></div>
+  <script>
+  function toggleMenu() {
+    const navbarLinks = document.getElementById('navbarLinks');
+    navbarLinks.classList.toggle('show');
+  }
 
-    var particleCount = 50;
-    var particles = [];
+  function hideMenu() {
+    const navbarLinks = document.getElementById('navbarLinks');
+    navbarLinks.classList.remove('show');
+  }
 
-    for (var i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+  window.addEventListener('resize', function() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth > 600) {
+      hideMenu();
     }
+  });
 
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = Math.random() * 2 - 1;
-      this.vy = Math.random() * 2 - 1;
-      this.radius = Math.random() * 10 + 10;
+  const gameCards = {
+    "card3": {
+      "title": "Game Card 3",
+      "image": "/img/place.png",
+      "url": "/pages/games/idminor/index.html"
+    },
+    "card2": {
+      "title": "Game Card 2",
+      "image": "/img/place.png",
+      "url": "https://www.example.com/card3"
+    },
+    "card1": {
+      "title": "Game Card 1",
+      "image": "/img/place.png",
+      "url": "https://www.example.com/card3"
     }
+  };
 
-    // Draw particles
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalCompositeOperation = "lighter";
+  const sortedCards = {};
+  Object.keys(gameCards).sort().forEach(key => {
+    sortedCards[key] = gameCards[key];
+  });
 
-      for (var i = 0; i < particleCount; i++) {
-        var p = particles[i];
+  const cardContainer = document.querySelector('.card-container');
+  Object.keys(sortedCards).forEach(key => {
+    const card = sortedCards[key];
+    const cardElement = document.createElement('div');
+    cardElement.classList.add('card');
+    cardElement.innerHTML = `
+      <a href="${card.url}">
+        <img src="${card.image}" alt="${card.title}">
+        <h2>${card.title}</h2>
+      </a>
+    `;
+    cardContainer.appendChild(cardElement);
+  });
+</script>
 
-        ctx.beginPath();
-        var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-        gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
-        gradient.addColorStop(0.5, "rgba(0, 0, 0, 0)");
-        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-        ctx.fillStyle = gradient;
-        ctx.strokeStyle = "#FFFFFF";
-        ctx.lineWidth = 1;
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
-        ctx.fill();
-        ctx.stroke();
-
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < -50) p.x = canvas.width + 50;
-        if (p.y < -50) p.y = canvas.height + 50;
-        if (p.x > canvas.width + 50) p.x = -50;
-        if (p.y > canvas.height + 50) p.y = -50;
-      }
-
-      requestAnimationFrame(draw);
-    }
-
-    draw();
-
-    window.addEventListener('resize', function () {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    function toggleMenu() {
-      const navbarLinks = document.getElementById('navbarLinks');
-      navbarLinks.classList.toggle('show');
-    }
-
-    function showLoadingIcon() {
-      const loadingIcon = document.getElementById('loadingIcon');
-      loadingIcon.style.display = 'inline-block';
-    }
-  </script>
-  </body>
+</body>
 </html>
-    
-    
