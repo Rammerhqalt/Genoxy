@@ -1,12 +1,5 @@
-# MagicRammer
-This is Created By RammerHq Creator [Creator of RammerCenter]  in Collab of TheMagicMushroom [Creator Of THJMATH]
-Original Site link- https://thjproxy-1nis.onrender.com/
-Our Bios
+# Genarcy Is Cool
 
-.center {
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 50%;
-}
-
+This is First Created by Golden [Rammerhq] 
+Genarcy has permission by me to use the templete- games are owned by 3kh0 very much love him in all his quirky ways
+templete is forked by [Rammerhqalt] in order to give access
