@@ -147,43 +147,44 @@
     }
   });
 
-  const gameCards = {
-    "card3": {
-      "title": "Among US",
-      "image": "https://i.ibb.co/pRp1cMw/among-us.png",
-      "url": "game/amoungus"
-    },
-    "card2": {
-      "title": "Rocket League",
-      "image": "https://i.ibb.co/nnGy9cL/rocket-league.jpg",
-      "url": "game/rocket-league"
-    },
-    "card1": {
-      "title": "Gernarcy Discord",
-      "image": "https://i.ibb.co/3m8QbXd/discord-png.png",
-      "url": "https://discord.gg/weSvd7Td2e"
-    }
-  };
+    const gameCards = {
+      "card3": {
+        "title": "Among US",
+        "image": "https://i.ibb.co/pRp1cMw/among-us.png",
+        "url": "game/amoungus"
+      },
+      "card2": {
+        "title": "Rocket League",
+        "image": "https://i.ibb.co/nnGy9cL/rocket-league.jpg",
+        "url": "game/rocket-league"
+      },
+      "card1": {
+        "title": "Gernarcy Discord",
+        "image": "https://i.ibb.co/3m8QbXd/discord-png.png",
+        "url": "https://discord.gg/weSvd7Td2e"
+      }
+    };
 
-  const sortedCards = {};
-  Object.keys(gameCards).sort().forEach(key => {
-    sortedCards[key] = gameCards[key];
-  });
+    // Sort the game cards by title
+    const sortedCards = {};
+    Object.keys(gameCards)
+      .sort((a, b) => gameCards[a].title.localeCompare(gameCards[b].title))
+      .forEach((key, index) => {
+        sortedCards[`card${index + 1}`] = gameCards[key];
+      });
 
-  const cardContainer = document.querySelector('.card-container');
-  Object.keys(sortedCards).forEach(key => {
-    const card = sortedCards[key];
-    const cardElement = document.createElement('div');
-    cardElement.classList.add('card');
-    const anchorElement = document.createElement('a');
-    anchorElement.href = card.url;
-    anchorElement.innerHTML = `
-      <img src="${card.image}" alt="${card.title}">
-      <h2>${card.title}</h2>
-    `;
-    cardElement.appendChild(anchorElement);
-    cardContainer.appendChild(cardElement);
-  });
+    const cardContainer = document.querySelector('.card-container');
+    Object.keys(sortedCards).forEach(key => {
+      const card = sortedCards[key];
+      const cardElement = document.createElement('a');
+      cardElement.classList.add('card');
+      cardElement.href = card.url;
+      cardElement.innerHTML = `
+        <img src="${card.image}" alt="${card.title}">
+        <h2>${card.title}</h2>
+      `;
+      cardContainer.appendChild(cardElement);
+    });
 </script>
 
 </body>
